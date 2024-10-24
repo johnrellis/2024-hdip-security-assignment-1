@@ -1,0 +1,63 @@
+# users-api
+:toc:
+
+An API for performing CRUDL on users
+
+
+## CAUTION - OUT OF DATE DEPENDENCIES
+
+Note: this repo has intentionally out of date dependencies as it is a starting point for a secuity assignment
+
+## Running and testing with docker-compose
+
+To run the application, simply use docker-compose
+
+`docker-compose up -d`
+
+or run without the `-d` flag to keep the application in the foreground.
+
+This will create 2 services, api and mongo.
+
+To verify that the api is running, run
+
+`curl http://localhost:3000`
+
+A response with a 200 HTTP code will respond with the message "I am alive".
+
+Unit and integration tests can be run with the following commands respectively :
+
+* `docker exec -it api npm run test`
+* `docker exec -it api npm run integration`
+
+## A quick intro to the API
+
+The following actions are currently supported:
+
+* CREATE - POST /api/v1/users with a json body
+* READ - GET /api/v1/users/:id
+* UPDATE- PUT /api/v1/users/:id with a json body, if `id` does not exist, a new user will be created
+* DELETE - DELETE /api/v1/users/:id
+* LIST - GET /api/v1/users
+** user property names can be used to filter e.g. `?email=john@home.com`.  Full match is currently required, less than or greater than queries are not yet supported.  Pagination is supported via `limit`, `offset` `sort` e.g. `?limit=10&offset=10&sort=-email` to sort descending or `?limit=10&offset=10&sort=email` for ascending.  Pagination is managed by the `paginationAndSort.js` middleware.
+
+
+## Stack
+
+* API - Node.js - engine configured to greater or equal to v8.11.1
+* Persistence - Mongodb - tested against version 3.6 - the integration tests will continue to test against the latest version until an incompatibility fails the build.  Mongoose is used as an ORM.
+
+## Running without docker-cpmpose
+
+If running without the docker-compose.yml, the following environment variable are required:
+
+* MONGODB_HOST e.g. `export MONGODB_HOST=localhost`
+
+With a mongodb instance running on on the MONGODB_HOST with the default port exposed, the app can then be started with `node app.js`.  Currently, authentication or custom mongodb ports are not implemented
+
+## Code Quality and Testing
+
+### Linting
+
+This repo is linted via eslint, all configuration is located in `.eslintrc.js`.  Linting is run as a pre-commit hook via the `pre-commit` npm module and via the npm command 
+
+`npm run lint`

@@ -1,0 +1,59 @@
+{
+  "name": "johnrellis-users-api",
+  "version": "0.0.1",
+  "description": "An API to control your users.",
+  "main": "app.js",
+  "homepage": "https://github.com/johnrellis/johnrellis-users-api#readme",
+  "scripts": {
+    "test": "nyc mocha test/unit --recursive",
+    "integration": "mocha test/integration",
+    "lint": "node_modules/.bin/eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnrellis/johnrellis-users-api.git"
+  },
+  "keywords": [
+    "users",
+    "node"
+  ],
+  "author": "john.d.rellis@gmail.com",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/johnrellis/johnrellis-users-api/issues"
+  },
+  "engines": {
+    "node": ">= v8.11.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "lodash": "^4.17.10",
+    "mongoose": "^5.0.16",
+    "winston": "^2.4.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.1.0",
+    "mockery": "^2.1.0",
+    "nyc": "^11.7.1",
+    "pre-commit": "^1.2.2",
+    "sinon": "^4.5.0",
+    "sinon-chai": "^3.0.0",
+    "sinon-express-mock": "^2.0.0"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 80,
+    "statements": 80,
+    "functions": 80,
+    "branches": 80,
+    "all": true
+  }
+}

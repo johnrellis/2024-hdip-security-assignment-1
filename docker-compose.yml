@@ -1,0 +1,17 @@
+services:
+  api:
+    container_name: api
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    command: node app.js
+    links:
+      - mongo
+    environment:
+        - MONGODB_HOST=mongo
+  mongo:
+    container_name: mongo
+    image: mongo:3.6
+    ports:
+      - "27017:27017"
