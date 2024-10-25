@@ -8,7 +8,7 @@ An API for performing CRUDL on users
 
 Note: this repo has intentionally out of date dependencies as it is a starting point for a secuity assignment
 
-## Running and testing with docker-compose
+## Running with docker-compose
 
 To run the application, simply use docker-compose
 
@@ -24,10 +24,6 @@ To verify that the api is running, run
 
 A response with a 200 HTTP code will respond with the message "I am alive".
 
-Unit and integration tests can be run with the following commands respectively :
-
-* `docker exec -it api npm run test`
-* `docker exec -it api npm run integration`
 
 ## A quick intro to the API
 
@@ -40,13 +36,22 @@ The following actions are currently supported:
 * LIST - GET /api/v1/users
 ** user property names can be used to filter e.g. `?email=john@home.com`.  Full match is currently required, less than or greater than queries are not yet supported.  Pagination is supported via `limit`, `offset` `sort` e.g. `?limit=10&offset=10&sort=-email` to sort descending or `?limit=10&offset=10&sort=email` for ascending.  Pagination is managed by the `paginationAndSort.js` middleware.
 
+### Examples
+
+#### Create a user
+
+`curl -X POST http://localhost:3000/api/v1/users -H "Content-Type: application/json" -d '{"email":"john@email.com"}'`
+
+#### List users
+
+`url http://localhost:3000/api/v1/users -H "Content-Type: application/json"`
 
 ## Stack
 
 * API - Node.js - engine configured to greater or equal to v8.11.1
 * Persistence - Mongodb - tested against version 3.6 - the integration tests will continue to test against the latest version until an incompatibility fails the build.  Mongoose is used as an ORM.
 
-## Running without docker-cpmpose
+## Running without docker-compose
 
 If running without the docker-compose.yml, the following environment variable are required:
 
