@@ -44,7 +44,7 @@ The following actions are currently supported:
 
 #### List users
 
-`url http://localhost:3000/api/v1/users -H "Content-Type: application/json"`
+`curl http://localhost:3000/api/v1/users
 
 ## Stack
 
